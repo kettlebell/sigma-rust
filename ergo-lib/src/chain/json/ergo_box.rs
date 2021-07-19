@@ -21,6 +21,8 @@ use crate::chain::{
 use serde::Deserialize;
 use thiserror::Error;
 
+mod box_value;
+
 #[derive(Deserialize, PartialEq, Eq, Debug, Clone)]
 pub struct ErgoBoxFromJson {
     #[serde(rename = "boxId", alias = "id")]
