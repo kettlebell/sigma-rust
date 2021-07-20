@@ -165,6 +165,7 @@ impl From<(TokenId, TokenAmount)> for Token {
     }
 }
 
+#[cfg(feature = "arbitrary")]
 pub(crate) mod arbitrary {
     use crate::chain::Base16DecodedBytes;
 

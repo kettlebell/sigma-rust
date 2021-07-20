@@ -209,6 +209,7 @@ pub fn checked_sum<I: Iterator<Item = BoxValue>>(mut iter: I) -> Result<BoxValue
         })
 }
 
+#[cfg(feature = "arbitrary")]
 pub(crate) mod arbitrary {
     use super::*;
     extern crate derive_more;
