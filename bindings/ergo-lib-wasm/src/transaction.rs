@@ -71,9 +71,10 @@ impl Transaction {
         self.0.id().into()
     }
 
-    /// JSON representation (compatible with Ergo Node/Explorer API)
-    pub fn to_json(&self) -> Result<JsValue, JsValue> {
-        JsValue::from_serde(&self.0.clone()).map_err(|e| JsValue::from_str(&format!("{}", e)))
+    /// JSON representation as text (compatible with Ergo Node/Explorer API)
+    pub fn to_json(&self) -> Result<String, JsValue> {
+        serde_json::to_string_pretty(&self.0.clone())
+            .map_err(|e| JsValue::from_str(&format!("{}", e)))
     }
 
     /// JSON representation (with box value and token amount encoding as strings)
@@ -153,9 +154,10 @@ impl UnsignedTransaction {
         self.0.output_candidates.as_vec().clone().into()
     }
 
-    /// JSON representation (compatible with Ergo Node/Explorer API)
-    pub fn to_json(&self) -> Result<JsValue, JsValue> {
-        JsValue::from_serde(&self.0.clone()).map_err(|e| JsValue::from_str(&format!("{}", e)))
+    /// JSON representation as text (compatible with Ergo Node/Explorer API)
+    pub fn to_json(&self) -> Result<String, JsValue> {
+        serde_json::to_string_pretty(&self.0.clone())
+            .map_err(|e| JsValue::from_str(&format!("{}", e)))
     }
 
     /// JSON representation (with box value and token amount encoding as strings)
