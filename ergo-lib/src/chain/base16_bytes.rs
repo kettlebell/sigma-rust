@@ -85,4 +85,3 @@ impl Base16Str for Constant {
         base16::encode_lower(&self.sigma_serialize_bytes().unwrap())
     }
 }
-
