@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased] - ReleaseDate
 
 ### Added 
-- WASM `to_json_dapp()` (along `to_json_dapp()`) that encodes the same JSON as `to_json()` but box value and token amount encodes as strings to avoid accuracy loss in JS [#346](https://github.com/ergoplatform/sigma-rust/pull/346);
+- WASM `to_js_eip12()` (along `to_json()`) that encodes JSON according to [EIP-12](https://github.com/ergoplatform/eips/pull/23) (similar to JSON by `to_json()`, but box value and token amount encodes as strings to avoid accuracy loss in JS) [#346](https://github.com/ergoplatform/sigma-rust/pull/346);
 - `Coll.slice` [#309](https://github.com/ergoplatform/sigma-rust/pull/309);
 - Byte-wise XOR for byte arrays [#310](https://github.com/ergoplatform/sigma-rust/pull/310);
 - `Constant::from_i64_str_array` and `to_i64_str_array` for `Coll[Long]` encoding [#311](https://github.com/ergoplatform/sigma-rust/pull/311);
