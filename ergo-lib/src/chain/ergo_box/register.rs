@@ -306,8 +306,8 @@ impl TryFrom<i8> for MandatoryRegisterId {
     }
 }
 
-#[cfg(test)]
-mod tests {
+#[cfg(feature = "arbitrary")]
+pub(crate) mod arbitrary {
     use super::*;
     use proptest::{arbitrary::Arbitrary, collection::vec, prelude::*};
 
@@ -324,6 +324,12 @@ mod tests {
                 .boxed()
         }
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use proptest::prelude::*;
 
     proptest! {
 

@@ -3,14 +3,14 @@
 pub(crate) mod block_header;
 pub(crate) mod context_extension;
 pub(crate) mod ergo_box;
-pub(crate) mod ergo_tree;
+pub mod ergo_tree;
 pub(crate) mod transaction;
 
 use ergotree_interpreter::sigma_protocol::prover::ProofBytes;
 use serde::Serializer;
 use serde::{Deserialize, Serialize};
 
-pub fn serialize_bytes<S, T>(bytes: T, serializer: S) -> Result<S::Ok, S::Error>
+pub(crate) fn serialize_bytes<S, T>(bytes: T, serializer: S) -> Result<S::Ok, S::Error>
 where
     S: Serializer,
     T: AsRef<[u8]>,
@@ -25,7 +25,7 @@ where
     serde(remote = "ProofBytes")
 )]
 #[derive(PartialEq, Eq, Hash, Debug, Clone)]
-pub enum ProofBytesSerde {
+pub(crate) enum ProofBytesSerde {
     /// Empty proof
     Empty,
     /// Non-empty proof

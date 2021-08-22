@@ -14,6 +14,9 @@ use ergotree_ir::serialization::SigmaSerializationError;
 use ergotree_ir::serialization::SigmaSerializeResult;
 pub use input::*;
 
+#[cfg(feature = "arbitrary")]
+use proptest_derive::Arbitrary;
+
 #[cfg(feature = "json")]
 use super::json;
 use super::{
@@ -23,20 +26,20 @@ use super::{
     token::TokenId,
 };
 use indexmap::IndexSet;
-#[cfg(test)]
-use proptest_derive::Arbitrary;
+
 #[cfg(feature = "json")]
 use serde::{Deserialize, Serialize};
 
 use std::convert::TryFrom;
 use std::convert::TryInto;
 use std::iter::FromIterator;
+
 #[cfg(feature = "json")]
 use thiserror::Error;
 
 /// Transaction id (ModifierId in sigmastate)
 #[derive(PartialEq, Eq, Hash, Debug, Clone)]
-#[cfg_attr(test, derive(Arbitrary))]
+#[cfg_attr(feature = "arbitrary", derive(Arbitrary))]
 #[cfg_attr(feature = "json", derive(Serialize, Deserialize))]
 pub struct TxId(pub Digest32);
 

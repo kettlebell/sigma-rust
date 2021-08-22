@@ -1,7 +1,7 @@
 //! Ergo chain types
 
 #[cfg(feature = "json")]
-mod json;
+pub mod json;
 
 mod base16_bytes;
 mod digest32;

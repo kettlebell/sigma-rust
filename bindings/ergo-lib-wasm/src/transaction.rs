@@ -4,6 +4,7 @@ use crate::box_coll::ErgoBoxCandidates;
 use crate::box_coll::ErgoBoxes;
 use crate::data_input::DataInputs;
 use crate::input::{Inputs, UnsignedInputs};
+use crate::json::TransactionJsonDapp;
 use ergo_lib::chain;
 use std::convert::TryFrom;
 use std::convert::TryInto;
@@ -69,9 +70,15 @@ impl Transaction {
         self.0.id().into()
     }
 
-    /// JSON representation
+    /// JSON representation (compatible with Ergo Node/Explorer API)
     pub fn to_json(&self) -> Result<JsValue, JsValue> {
         JsValue::from_serde(&self.0.clone()).map_err(|e| JsValue::from_str(&format!("{}", e)))
+    }
+
+    /// JSON representation (with box value and token amount encoding as strings)
+    pub fn to_json_dapp(&self) -> Result<JsValue, JsValue> {
+        let tx_dapp: TransactionJsonDapp = self.0.clone().into();
+        JsValue::from_serde(&tx_dapp).map_err(|e| JsValue::from_str(&format!("{}", e)))
     }
 
     /// JSON representation

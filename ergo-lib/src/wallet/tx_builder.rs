@@ -292,9 +292,10 @@ mod tests {
     use sigma_test_util::force_any_val;
     use sigma_test_util::force_any_val_with;
 
+    use crate::chain::token::arbitrary::ArbTokenIdParam;
     use crate::chain::{
         ergo_box::{checked_sum, ErgoBox, NonMandatoryRegisters},
-        token::{tests::ArbTokenIdParam, Token, TokenAmount, TokenId},
+        token::{Token, TokenAmount, TokenId},
         transaction::TxId,
     };
     use crate::wallet::box_selector::{BoxSelector, SimpleBoxSelector};

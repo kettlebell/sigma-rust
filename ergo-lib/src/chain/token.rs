@@ -11,11 +11,12 @@ use super::digest32::Digest32;
 use super::ergo_box::BoxId;
 use derive_more::From;
 use derive_more::Into;
-#[cfg(test)]
-use proptest_derive::Arbitrary;
 #[cfg(feature = "json")]
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
+
+#[cfg(feature = "arbitrary")]
+use proptest_derive::Arbitrary;
 
 /// newtype for token id
 #[derive(PartialEq, Eq, Hash, Debug, Clone, From, Into)]
@@ -64,7 +65,6 @@ pub struct TokenAmount(u64);
 #[serde_with::serde_as]
 #[derive(Serialize, Deserialize, PartialEq, Eq, Hash, Debug, Clone, Copy, PartialOrd, Ord)]
 pub struct TokenAmount(
-    // #[serde_as(as = "serde_with::PickFirst<(_, serde_with::DisplayFromStr)>")] u64,
     #[serde_as(as = "serde_with::PickFirst<(serde_with::DisplayFromStr, _)>")] u64,
 );
 
@@ -139,7 +139,7 @@ impl From<TokenAmount> for i64 {
 /// Token represented with token id paired with it's amount
 #[cfg_attr(feature = "json", derive(Serialize, Deserialize))]
 #[derive(PartialEq, Eq, Debug, Clone)]
-#[cfg_attr(test, derive(Arbitrary))]
+#[cfg_attr(feature = "arbitrary", derive(Arbitrary))]
 pub struct Token {
     /// token id
     #[cfg_attr(feature = "json", serde(rename = "tokenId"))]
@@ -158,11 +158,10 @@ impl From<(TokenId, TokenAmount)> for Token {
     }
 }
 
-#[cfg(test)]
-pub mod tests {
-    use super::*;
+pub(crate) mod arbitrary {
     use crate::chain::Base16DecodedBytes;
-    use ergotree_ir::serialization::sigma_serialize_roundtrip;
+
+    use super::*;
     use proptest::prelude::*;
 
     pub enum ArbTokenIdParam {
@@ -231,6 +230,14 @@ pub mod tests {
         }
         type Strategy = BoxedStrategy<Self>;
     }
+}
+
+#[cfg(test)]
+pub mod tests {
+    use ergotree_ir::serialization::sigma_serialize_roundtrip;
+    use proptest::prelude::*;
+
+    use crate::chain::token::TokenId;
 
     proptest! {
 

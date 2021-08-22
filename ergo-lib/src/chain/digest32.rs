@@ -126,8 +126,8 @@ pub enum Digest32Error {
     InvalidSize(#[from] std::array::TryFromSliceError),
 }
 
-#[cfg(test)]
-mod tests {
+#[cfg(feature = "arbitrary")]
+pub(crate) mod arbitrary {
     use super::Digest;
     use proptest::prelude::{Arbitrary, BoxedStrategy};
     use proptest::{collection::vec, prelude::*};
@@ -144,3 +144,6 @@ mod tests {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {}

@@ -538,14 +538,11 @@ pub fn parse_box_with_indexed_digests<R: SigmaByteRead>(
     })
 }
 
-#[cfg(test)]
-mod tests {
-
-    use super::box_value::tests::ArbBoxValueRange;
+#[cfg(feature = "arbitrary")]
+pub(crate) mod arbitrary {
+    use super::box_value::arbitrary::ArbBoxValueRange;
     use super::*;
-    use ergotree_ir::serialization::sigma_serialize_roundtrip;
     use proptest::{arbitrary::Arbitrary, collection::vec, prelude::*};
-    use sigma_test_util::force_any_val;
 
     impl Arbitrary for ErgoBoxCandidate {
         type Parameters = ArbBoxValueRange;
@@ -600,6 +597,14 @@ mod tests {
 
         type Strategy = BoxedStrategy<Self>;
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use ergotree_ir::serialization::sigma_serialize_roundtrip;
+    use proptest::prelude::*;
+    use sigma_test_util::force_any_val;
 
     #[test]
     fn test_sum_tokens_repeating_token_id() {
