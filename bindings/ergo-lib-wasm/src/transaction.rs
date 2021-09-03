@@ -5,6 +5,8 @@ use crate::box_coll::ErgoBoxes;
 use crate::data_input::DataInputs;
 use crate::input::{Inputs, UnsignedInputs};
 use ergo_lib::chain;
+use ergo_lib::chain::transaction::distinct_token_ids;
+use js_sys::Uint8Array;
 use std::convert::TryFrom;
 use std::convert::TryInto;
 use wasm_bindgen::prelude::*;
@@ -155,6 +157,14 @@ impl UnsignedTransaction {
         serde_json::from_str(json)
             .map(Self)
             .map_err(|e| JsValue::from_str(&format!("{}", e)))
+    }
+
+    /// Returns distinct token id from output_candidates as array of byte arrays
+    pub fn distinct_token_ids(&self) -> Vec<Uint8Array> {
+        distinct_token_ids(self.0.output_candidates.clone())
+            .iter()
+            .map(|id| Uint8Array::from(id.as_ref()))
+            .collect()
     }
 }
 
