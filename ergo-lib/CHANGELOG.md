@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased] - ReleaseDate
 
 ### Added 
+- extract distinct token ids on tx serialization and expose as `UnsignedTransaction::distinct_token_ids()` in Wasm [#387](https://github.com/ergoplatform/sigma-rust/pull/387);
 - add `to_bytes()` for `BoxValue` and `TokenAmount` in Wasm [#387](https://github.com/ergoplatform/sigma-rust/pull/387);
 - `Constant::sigma_serialize_bytes()`, `ContextExtension::sigma_serialize_bytes()` in Wasm [#387](https://github.com/ergoplatform/sigma-rust/pull/387);
 - `TokenId::as_bytes()` and `BoxId::as_bytes()` in Wasm [#387](https://github.com/ergoplatform/sigma-rust/pull/387);
