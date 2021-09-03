@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased] - ReleaseDate
 
 ### Added 
-- add (Coll[Byte], Coll[Byte]) and (Long, Long) support for Constant conversion in JS [#386](https://github.com/ergoplatform/sigma-rust/pull/386);
+- `Constant::sigma_serialize_bytes()`, `ContextExtension::sigma_serialize_bytes()` in Wasm [#387](https://github.com/ergoplatform/sigma-rust/pull/387);
+- `TokenId::as_bytes()` and `BoxId::as_bytes()` in Wasm [#387](https://github.com/ergoplatform/sigma-rust/pull/387);
+- `(Coll[Byte], Coll[Byte])` and `(Long, Long)` support for Constant conversion in JS [#386](https://github.com/ergoplatform/sigma-rust/pull/386);
 - `Coll.slice` [#309](https://github.com/ergoplatform/sigma-rust/pull/309);
 - Byte-wise XOR for byte arrays [#310](https://github.com/ergoplatform/sigma-rust/pull/310);
 - `Constant::from_i64_str_array` and `to_i64_str_array` for `Coll[Long]` encoding [#311](https://github.com/ergoplatform/sigma-rust/pull/311);
@@ -17,6 +19,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `SubstConst` IR node and serialization [#318] (https://github.com/ergoplatform/sigma-rust/pull/318);
 - Better Debug print for EC point [#319](https://github.com/ergoplatform/sigma-rust/pull/319);
 - `Constant::from_ecpoint_bytes` to Wasm API [#324](https://github.com/ergoplatform/sigma-rust/pull/324);
+
+
+### Changed(BREAKING!):
+- `ErgoTree::to_bytes()` renamed to  `ErgoTree::sigma_serialize_bytes()` in Wasm [#387](https://github.com/ergoplatform/sigma-rust/pull/387);
 
 ### Changed
 - `SigmaSerializable:sigma_serialize` errors are extended beyond `io::Error` [#328](https://github.com/ergoplatform/sigma-rust/pull/328);
