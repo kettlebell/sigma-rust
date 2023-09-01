@@ -24,7 +24,6 @@ use crate::serialization::{
 use elliptic_curve::rand_core::RngCore;
 use k256::elliptic_curve::PrimeField;
 use k256::Scalar;
-use num_bigint::Sign;
 use num_bigint::ToBigUint;
 use num_bigint::{BigInt, BigUint};
 use num_traits::ToPrimitive;
@@ -75,9 +74,6 @@ fn biguint_to_bytes(x: &BigUint) -> [u8; 32] {
 /// Attempts to create Scalar from BigInt256
 /// Returns None if not in the range [0, modulus).
 pub fn bigint256_to_scalar(bi: BigInt256) -> Option<Scalar> {
-    if Sign::Minus == bi.sign() {
-        return None;
-    }
     #[allow(clippy::unwrap_used)] // since it's 256-bit BigInt it should always fit into BigUint
     let bu = bi.to_biguint().unwrap();
     let bytes = biguint_to_bytes(&bu);
